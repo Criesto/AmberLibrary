@@ -35,6 +35,7 @@ final class Version20210607065139 extends AbstractMigration
         $this->addSql('ALTER TABLE ksiazki_kategorie ADD CONSTRAINT FK_72F14ECF7AB35870 FOREIGN KEY (ksiazki_id) REFERENCES ksiazki (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE ksiazki_kategorie ADD CONSTRAINT FK_72F14ECFBAF991D3 FOREIGN KEY (kategorie_id) REFERENCES kategorie (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE wypozyczenia ADD CONSTRAINT FK_62A2F48E9861D113 FOREIGN KEY (czytelnik_id) REFERENCES czytelnik (id)');
+        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, username VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, first_name VARCHAR(32) NOT NULL, last_name VARCHAR(64) NOT NULL, UNIQUE INDEX UNIQ_8D93D649F85E0677 (username), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
     public function down(Schema $schema): void
@@ -55,5 +56,6 @@ final class Version20210607065139 extends AbstractMigration
         $this->addSql('DROP TABLE ksiazki_autorzy');
         $this->addSql('DROP TABLE ksiazki_kategorie');
         $this->addSql('DROP TABLE wypozyczenia');
+        $this->addSql('DROP TABLE user');
     }
 }
